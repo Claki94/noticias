@@ -1,10 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import useSelect from '../hooks/useSelect';
 import formStyles from '../css/Formulario.module.css';
 
-const Formulario = () => {
+const Formulario = ({guardarCategoria}) => {
     
+    // Opciones del select
     const OPCIONES = [
         {value: 'general', label: 'General'},
         {value: 'business', label: 'Negocios'},
@@ -18,11 +20,19 @@ const Formulario = () => {
     // Custom hook useSelect
     const [categoria, SelectNoticias] = useSelect('general', OPCIONES);
 
+    const handleSubmit = e => {
+        e.preventDefault();
+
+        guardarCategoria(categoria);
+    }
+
     return (  
         <div className={`${formStyles.buscador} row`}>
             <div className="col s12 m8 offset-m2">
-                <form>
-                    <h3 className={formStyles.heading}>Encuentra noticias por categoría</h3>
+                <form
+                    onSubmit={handleSubmit}
+                >
+                    <h3 className={formStyles.heading}>Encuentra noticias de US por categoría</h3>
 
                     <SelectNoticias />
 
@@ -37,6 +47,10 @@ const Formulario = () => {
             </div>
         </div>
     );
+}
+
+Formulario.propTypes = {
+    guardarCategoria: PropTypes.func.isRequired
 }
  
 export default Formulario;

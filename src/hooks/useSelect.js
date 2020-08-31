@@ -11,7 +11,6 @@ const useSelect = (stateInicial, opciones) => {
             value={categoria}
             onChange={e => guardarCategoria(e.target.value)}
         >
-            <option value="">Seleccione</option>
             {opciones.map(opcion => (
                 <option 
                     key={opcion.value}
